@@ -53,7 +53,7 @@ bool isHumanoid = true;
 int leftShoulderAngle = 30;
 int rightShoulderAngle = 30;
 
-SoftwareSerial mySerial(10, 11); // RX, TX
+SoftwareSerial BT(10, 11); // RX, TX
 
 String determineMovementVert(int movY) {
 
@@ -169,14 +169,17 @@ String determineShoulderMovement(bool isLeftShoulder, int ctrlBut) {
 }
 
 
+void sendString(String message) {
+  int messageLength = message.length();
+  for (int i = 0; i < messageLength; i++) {
+    BT.write(message[i]);
+  }
+  BT.write('\n');
+}
+
+
 void setup() {
   
-  if (mySerial.available()) {
-    Serial.print(mySerial.read());
-  }
-  mySerial.print(Serial.read());
-  mySerial.write(Serial.read());
-
   pinMode(LEFT_CTRL_BUT,INPUT);
   pinMode(RIGHT_CTRL_BUT,INPUT);
   pinMode(HUM_TO_VEHIC_BUT,INPUT);
@@ -184,12 +187,16 @@ void setup() {
   digitalWrite(LEFT_CTRL_BUT,HIGH);
   digitalWrite(RIGHT_CTRL_BUT,HIGH);
 
-  Serial.begin(38400);
+  Serial.begin(9600);
+  BT.begin(9600);
   Serial.println("Started!");
 
 }
 
 void loop() {
+
+  
+
 
   String transformCmd = "";
   if (digitalRead(HUM_TO_VEHIC_BUT)) {
@@ -233,31 +240,39 @@ void loop() {
 
   
   if (!horzCmd.equals("")) {
+    sendString(horzCmd);
   }
 
   if (!vertCmd.equals("")) {
+    sendString(vertCmd);
   }
 
   if (!leftArmCmd.equals("")) {
+    sendString(leftArmCmd);
   }
 
   if (!leftElbowCmd.equals("")) {
+    sendString(leftElbowCmd);
   }
 
   if (!leftShoulderCmd.equals("")) {
+    sendString(leftShoulderCmd);
   }
 
   if (!rightShoulderCmd.equals("")) {
+    sendString(rightShoulderCmd);
   }
 
   if (!rightArmCmd.equals("")) {
+    sendString(rightArmCmd);
   }
 
   if (!rightElbowCmd.equals("")) {
+    sendString(rightElbowCmd);
   }
 
   if (!transformCmd.equals("")) {
-
+    sendString(transformCmd);
   }
 
 
