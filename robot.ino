@@ -1,6 +1,30 @@
 #include <SoftwareSerial.h>
 #include "ucode.h"
 
+/*
+IMPORTANT TO DO, DO NOT FORGET TO IMPLEMENT:
+TEMP/HUMIDITY SENSOR
+LED DISPLAY
+*/
+
+#define ULTRA_SONIC_ID 10
+
+// If there's an obstacle closer than DISTANCE_LIMIT, robot won't move forward. Only in humanoid mode.
+#define DISTANCE_LIMIT 2
+
+// These are the servo ids of the different compontents.
+#define RIGHT_SHOULDER_ID 1
+#define LEFT_SHOULDER_ID 4
+
+#define RIGHT_ELBOW_ID 5
+#define RIGHT_ARM_ID 6
+
+#define LEFT_ELBOW_ID 2
+#define RIGHT_ELBOW_ID 3
+
+// How much microcontroller should wait to let the robot transform, in miliseconds.
+#define TRANSFORMATION_DELAY 4000
+
 // Change the RX and TX pins accordingly.
 SoftwareSerial BT(10,11);
 
@@ -15,110 +39,101 @@ void loop() {
     protocol();
     if (protocolRunState == false) {
 
+      float distance = readUltrasonicDistance(ULTRA_SONIC_ID);
 
-    if (BT.available()) {
-      String cmd = BT.readStringUntil('\n');
+      if (BT.available()) {
+        String cmd = BT.readStringUntil('\n');
 
-      // Remove the last char, which is \n
-      cmd.remove(cmd.length() - 1);
-      
-      int indexOfSpace = cmd.indexOf(' ');
-      if (indexOfSpace == -1) {
+        // Remove the last char, which is \n
+        cmd.remove(cmd.length() - 1);
         
-        // PUT SWITCH CASES HERE
-        switch (cmd) {
-
-          case "VEHICLE-FORWARD":
-            // NOC robot acts move forward (vehicle) run times 1 
-            motion_case(9, 1);
-            break;
+        int indexOfSpace = cmd.indexOf(' ');
+        if (indexOfSpace == -1) {
           
-          case "VEHICLE-BACKWARD":
-            // NOC robot acts move backward (vehicle) run times 1
-            motion_case(10,1);
-            break;
+          // PUT SWITCH CASES HERE
+          switch (cmd) {
 
-          case "VEHICLE-LEFT":
-            // NOC robot acts turn left (vehicle) run times 1
-            motion_case(11,1);
-            break;
+            case "VEHICLE-FORWARD":
+              // NOC robot acts move forward (vehicle) run times 1 
+              motion_case(9, 1);
+              break;
+            
+            case "VEHICLE-BACKWARD":
+              // NOC robot acts move backward (vehicle) run times 1
+              motion_case(10,1);
+              break;
 
-          case "VEHICLE-RIGHT":
-            // NOC robot acts turn right (vehicle) run times 1
-            motion_case(12,1);
-            break;
-          
-          case "HUMANOID-FORWARD":
-            // NOC robot acts move forward (humanoid) run times 1
-            motion_case(1,1);
-            break;
+            case "VEHICLE-LEFT":
+              // NOC robot acts turn left (vehicle) run times 1
+              motion_case(11,1);
+              break;
 
-          case "HUMANOID-BACKWARD":
-            // NOC robot acts move backward (humanoid) run times 1
-            motion_case(2,1);
-            break;
-          
-          case "HUM-TO-VEHIC":
-            // NOC robot acts humanoid to vehicle run times 1
-            motion_case(13,1);
-            break;
-          
-          case "VEHIC-TO-HUM":
-            // NOC robot acts vehicle to humanoid run times 1
-            motion_case(0,1);
-            break;
+            case "VEHICLE-RIGHT":
+              // NOC robot acts turn right (vehicle) run times 1
+              motion_case(12,1);
+              break;
+            
+            case "HUMANOID-FORWARD":
+              if (distance > DISTANCE_LIMIT) {
+                // NOC robot acts move forward (humanoid) run times 1
+                motion_case(1,1);
+              }
+              break;
+
+            case "HUMANOID-BACKWARD":
+              // NOC robot acts move backward (humanoid) run times 1
+              motion_case(2,1);
+              break;
+            
+            case "HUM-TO-VEHIC":
+              // NOC robot acts humanoid to vehicle run times 1
+              motion_case(13,1);
+              delay(TRANSFORMATION_DELAY);
+              break;
+            
+            case "VEHIC-TO-HUM":
+              // NOC robot acts vehicle to humanoid run times 1
+              motion_case(0,1);
+              delay(TRANSFORMATION_DELAY);
+              break;
+          }
+
+        }
+        else {
+          String rootCmd = cmd.substring(0,indexOfSpace);
+          int angleCmd = cmd.substring(indexOfSpace+1).toInt();
+
+          // PUT SWITCH CASES HERE
+          switch (rootCmd) {
+            case "LEFT-ELBOW":
+              setServoAngle(LEFT_ELBOW_ID,angleCmd,1000);
+              break;
+            
+            case "RIGHT-ELBOW":
+              setServoAngle(RIGHT_ELBOW_ID,angleCmd,1000);
+              break;
+
+            case "LEFT-ARM":
+              setServoAngle(LEFT_ARM_ID,angleCmd,1000);
+              break;
+
+            case "RIGHT-ARM":
+              setServoAngle(RIGHT_ARM_ID,angleCmd,1000);
+              break;
+
+            case "LEFT-SHOULDER":
+              setServoAngle(LEFT_SHOULDER_ID,angleCmd,1000);
+              break;
+            
+            case "RIGHT-SHOULDER":
+              setServoAngle(RIGHT_SHOULDER_ID,angleCmd,1000);
+              break;
+          }
+
+
         }
 
       }
-      else {
-        String rootCmd = cmd.substring(0,indexOfSpace);
-        int angleCmd = cmd.substring(indexOfSpace).toInt();
-
-        // PUT SWITCH CASES HERE
-        switch (rootCmd) {
-          case "LEFT-ELBOW":
-            break;
-          
-          case "RIGHT-ELBOW":
-            break;
-
-          case "LEFT-ARM":
-            break;
-
-          case "RIGHT-ARM":
-            break;
-
-          case "LEFT-SHOULDER":
-            break;
-          
-          case "RIGHT-SHOULDER":
-            break;
-        }
-
-
-      }
-
-    }
 
     }
 }
-
-
-/*
-
-LIST OF COMMANDS 
-
-
-LEFT-ELBOW (ANGLE)
-RIGHT-ELBOW (ANGLE)
-
-LEFT-ARM (ANGLE)
-RIGHT-ARM (ANGLE)
-
-LEFT-SHOULDER (ANGLE)
-RIGHT-SHOULDER (ANGLE)
-
-HUM-TO-VEHIC
-VEHIC-TO-HUM
-
-*/
