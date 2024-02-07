@@ -53,6 +53,7 @@ bool isHumanoid = true;
 int leftShoulderAngle = 30;
 int rightShoulderAngle = 30;
 
+
 SoftwareSerial BT(10, 11); // RX, TX
 
 String determineMovementVert(int movY) {
@@ -138,7 +139,6 @@ String determineShoulderMovement(bool isLeftShoulder, int ctrlBut) {
 
   // Button returns 1 when not pressed, 0 when pressed.
   if (ctrlBut == 0 && isHumanoid) {
-
 
     if (isLeftShoulder) {
 
