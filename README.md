@@ -5,6 +5,7 @@ We have a robot kit called UKit Explore in our university student club. It's pos
 ## TODO LIST ✅
 ❌ Test the all commands. First test them without the controller (via a mobile phone), then test with the controller.
 ❌ Implement humidity and temperature sensors
+
 ❌ Implement the LED display.
 
 ### Controller Logic
