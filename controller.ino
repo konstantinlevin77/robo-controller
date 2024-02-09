@@ -127,7 +127,7 @@ String determineArmMovement(String arm, int ctrlX) {
   if ((ctrlX <= 490 || ctrlX >= 530) && isHumanoid) {
 
     int elbowAngle = map(ctrlX,0,1023,-118,118);
-    cmd = arm + "-ARM "+ String(elbowAngle);
+    cmd = arm + "-ARM "+ String(-1 * elbowAngle);
   }
 
   return cmd;

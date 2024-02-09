@@ -24,7 +24,7 @@ LED DISPLAY
 
 #define ULTRA_SONIC_ID 10
 
-// If there's an obstacle closer than DISTANCE_LIMIT, robot won't move forward. Only in humanoid mode.
+// If there's an obstacle closer than DISTANCE_LIMIT, robot won't move forward. Only in vehicle mode.
 #define DISTANCE_LIMIT 2
 
 // These are the servo ids of the different compontents.
@@ -64,87 +64,80 @@ void loop() {
         
         int indexOfSpace = cmd.indexOf(' ');
         if (indexOfSpace == -1) {
-          
-          // PUT SWITCH CASES HERE
-          switch (cmd) {
 
-            case "VEHICLE-FORWARD":
-              // NOC robot acts move forward (vehicle) run times 1 
-              motion_case(9, 1);
-              break;
-            
-            case "VEHICLE-BACKWARD":
-              // NOC robot acts move backward (vehicle) run times 1
-              motion_case(10,1);
-              break;
-
-            case "VEHICLE-LEFT":
-              // NOC robot acts turn left (vehicle) run times 1
-              motion_case(11,1);
-              break;
-
-            case "VEHICLE-RIGHT":
-              // NOC robot acts turn right (vehicle) run times 1
-              motion_case(12,1);
-              break;
-            
-            case "HUMANOID-FORWARD":
-              if (distance > DISTANCE_LIMIT) {
-                // NOC robot acts move forward (humanoid) run times 1
-                motion_case(1,1);
-              }
-              break;
-
-            case "HUMANOID-BACKWARD":
-              // NOC robot acts move backward (humanoid) run times 1
-              motion_case(2,1);
-              break;
-            
-            case "HUM-TO-VEHIC":
-              // NOC robot acts humanoid to vehicle run times 1
-              motion_case(13,1);
-              delay(TRANSFORMATION_DELAY);
-              break;
-            
-            case "VEHIC-TO-HUM":
-              // NOC robot acts vehicle to humanoid run times 1
-              motion_case(0,1);
-              delay(TRANSFORMATION_DELAY);
-              break;
+          if (cmd.equals("VEHICLE-FORWARD") && distance > DISTANCE_LIMIT) {
+            // NOC robot acts move forward (vehicle) run times 1 
+            motion_case(9, 1);
           }
+
+          if (cmd.equals("VEHICLE-BACKWARD")) {
+            // NOC robot acts move backward (vehicle) run times 1
+            motion_case(10,1);
+
+          }
+
+          if (cmd.equals("VEHICLE-LEFT")) {
+            // NOC robot acts turn left (vehicle) run times 1
+            motion_case(11,1);
+
+          }
+
+          if (cmd.equals("VEHICLE-RIGHT")) {
+            // NOC robot acts turn right (vehicle) run times 1
+            motion_case(12,1);
+          }
+
+          if (cmd.equals("HUMANOID-FORWARD")) {
+            // NOC robot acts move forward (humanoid) run times 1
+            motion_case(1,1);
+          }
+
+          if (cmd.equals("HUMANOID-BACKWARD")) {
+            // NOC robot acts move backward (humanoid) run times 1
+            motion_case(2,1);
+          }
+
+          if (cmd.equals("HUM-TO-VEHIC")) {
+            // NOC robot acts humanoid to vehicle run times 1
+            motion_case(13,1);
+            delay(TRANSFORMATION_DELAY);
+          }
+
+          if (cmd.equals("VEHIC-TO-HUM")) {
+            // NOC robot acts vehicle to humanoid run times 1
+            motion_case(0,1);
+            delay(TRANSFORMATION_DELAY);
+          }
+
 
         }
         else {
           String rootCmd = cmd.substring(0,indexOfSpace);
           int angleCmd = cmd.substring(indexOfSpace+1).toInt();
 
-          // PUT SWITCH CASES HERE
-          switch (rootCmd) {
-            case "LEFT-ELBOW":
-              setServoAngle(LEFT_ELBOW_ID,angleCmd,1000);
-              break;
-            
-            case "RIGHT-ELBOW":
-              setServoAngle(RIGHT_ELBOW_ID,angleCmd,1000);
-              break;
-
-            case "LEFT-ARM":
-              setServoAngle(LEFT_ARM_ID,angleCmd,1000);
-              break;
-
-            case "RIGHT-ARM":
-              setServoAngle(RIGHT_ARM_ID,angleCmd,1000);
-              break;
-
-            case "LEFT-SHOULDER":
-              setServoAngle(LEFT_SHOULDER_ID,angleCmd,1000);
-              break;
-            
-            case "RIGHT-SHOULDER":
-              setServoAngle(RIGHT_SHOULDER_ID,angleCmd,1000);
-              break;
+          if (rootCmd.equals("LEFT-ELBOW")) {
+            setServoAngle(LEFT_ELBOW_ID,angleCmd,1000);
           }
 
+          if (rootCmd.equals("RIGHT-ELBOW")) {
+            setServoAngle(RIGHT_ELBOW_ID,angleCmd,1000);
+          }
+
+          if (rootCmd.equals("LEFT-ARM")) {
+            setServoAngle(LEFT_ARM_ID,angleCmd,1000);
+          }
+
+          if (rootCmd.equals("RIGHT-ARM")) {
+            setServoAngle(RIGHT_ARM_ID,angleCmd,1000);
+          }
+
+          if (rootCmd.equals("LEFT-SHOULDER")) {
+            setServoAngle(LEFT_SHOULDER_ID,angleCmd,1000);
+          }
+
+          if (rootCmd.equals("RIGHT-SHOULDER")) {
+            setServoAngle(RIGHT_SHOULDER_ID,angleCmd,1000);
+          }
 
         }
 
