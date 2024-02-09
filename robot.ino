@@ -35,7 +35,7 @@ LED DISPLAY
 #define RIGHT_ARM_ID 6
 
 #define LEFT_ELBOW_ID 2
-#define RIGHT_ELBOW_ID 3
+#define LEFT_ARM_ID 3
 
 // How much microcontroller should wait to let the robot transform, in miliseconds.
 #define TRANSFORMATION_DELAY 4000
