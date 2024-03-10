@@ -81,6 +81,8 @@ void loop() {
 
           }
 
+
+
           if (cmd.equals("VEHICLE-LEFT")) {
             // NOC robot acts turn left (vehicle) run times 1
             motion_case(11,1);
@@ -91,6 +93,8 @@ void loop() {
             // NOC robot acts turn right (vehicle) run times 1
             motion_case(12,1);
           }
+
+/*
 
           if (cmd.equals("HUMANOID-FORWARD")) {
             // NOC robot acts move forward (humanoid) run times 1
@@ -113,7 +117,7 @@ void loop() {
             motion_case(0,1);
             delay(TRANSFORMATION_DELAY);
           }
-
+*/
 
         }
         else {
@@ -122,6 +126,8 @@ void loop() {
 
           Serial.print(rootCmd+" ");
           Serial.println(angleCmd);
+
+/*
 
           if (rootCmd.equals("LEFT-ELBOW")) {
             setServoAngle(LEFT_ELBOW_ID,angleCmd,1000);
@@ -146,6 +152,8 @@ void loop() {
           if (rootCmd.equals("RIGHT-SHOULDER")) {
             setServoAngle(RIGHT_SHOULDER_ID,angleCmd,1000);
           }
+
+*/
 
         }
 
