@@ -78,7 +78,7 @@ void loop() {
 
           if (cmd.equals("VEHICLE-BACKWARD")) {
             // NOC robot acts move backward (vehicle) run times 1
-            Serial.println("ROBOT SHOULD MOVE BACKWARD")
+            Serial.println("ROBOT SHOULD MOVE BACKWARD");
             motion_case(10,1);
 
           }
