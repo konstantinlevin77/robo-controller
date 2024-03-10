@@ -92,7 +92,7 @@ void loop() {
             motion_case(12,1);
           }
 
-/*
+
 
           if (cmd.equals("HUMANOID-FORWARD")) {
             // NOC robot acts move forward (humanoid) run times 1
@@ -115,7 +115,7 @@ void loop() {
             motion_case(0,1);
             delay(TRANSFORMATION_DELAY);
           }
-*/
+
 
         }
         else {
@@ -125,7 +125,7 @@ void loop() {
           Serial.print(rootCmd+" ");
           Serial.println(angleCmd);
 
-/*
+
 
           if (rootCmd.equals("LEFT-ELBOW")) {
             setServoAngle(LEFT_ELBOW_ID,angleCmd,1000);
@@ -151,7 +151,7 @@ void loop() {
             setServoAngle(RIGHT_SHOULDER_ID,angleCmd,1000);
           }
 
-*/
+
 
         }
 

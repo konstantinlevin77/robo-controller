@@ -48,7 +48,7 @@ Thus we've decided to increase the angle a little bit so that it won't make so m
 */
 #define SHOULDER_ANGLE_INCREASE 1.5
 
-bool isHumanoid = false;
+bool isHumanoid = true;
 
 int leftShoulderAngle = 30;
 int rightShoulderAngle = 30;
@@ -247,7 +247,6 @@ void loop() {
     sendString(vertCmd);
   }
 
-/*
 
   if (!leftArmCmd.equals("")) {
     sendString(leftArmCmd);
@@ -277,6 +276,6 @@ void loop() {
     sendString(transformCmd);
   }
 
-*/
+
 
 }
