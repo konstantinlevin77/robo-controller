@@ -206,7 +206,7 @@ void loop() {
     else {
       transformCmd = "VEHIC-TO-HUM";
     }
-    isHumanoid = !isHumanoid;
+    // isHumanoid = !isHumanoid;
   }
   
   int movX = analogRead(MOVEMENT_CTRL_HORZ);
