@@ -54,6 +54,8 @@ void loop() {
     protocol();
     if (protocolRunState == false) {
 
+      delay(2000);
+
       float distance = readUltrasonicDistance(ULTRA_SONIC_ID);
 
       if (BT.available()) {

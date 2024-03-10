@@ -54,7 +54,7 @@ int leftShoulderAngle = 30;
 int rightShoulderAngle = 30;
 
 
-SoftwareSerial BT(10, 11); // RX, TX
+SoftwareSerial BT(11, 10); // RX, TX
 
 String determineMovementVert(int movY) {
 
