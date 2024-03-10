@@ -61,9 +61,6 @@ void loop() {
 
       if (BT.available()) {
         String cmd = BT.readStringUntil('\n');
-
-        // Remove the last char, which is \n
-        cmd.remove(cmd.length() - 1);
         
         int indexOfSpace = cmd.indexOf(' ');
         if (indexOfSpace == -1) {
