@@ -48,7 +48,7 @@ Thus we've decided to increase the angle a little bit so that it won't make so m
 */
 #define SHOULDER_ANGLE_INCREASE 1.5
 
-bool isHumanoid = true;
+bool isHumanoid = false;
 
 int leftShoulderAngle = 30;
 int rightShoulderAngle = 30;
