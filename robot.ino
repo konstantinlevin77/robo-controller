@@ -70,7 +70,7 @@ void loop() {
 
           Serial.println(cmd);
 
-          if (cmd.equals("VEHICLE-FORWARD") && distance > DISTANCE_LIMIT) {
+          if (cmd.equals("VEHICLE-FORWARD") /*&& distance > DISTANCE_LIMIT*/) {
             // NOC robot acts move forward (vehicle) run times 1 
             Serial.println("ROBOT SHOULD MOVE FORWARD");
             motion_case(9, 1);
