@@ -47,6 +47,7 @@ void setup() {
     Initialization();
     if (protocolRunState == false) {
       BT.begin(9600);
+      Serial.begin(9600);
     }
 }
 
@@ -66,6 +67,8 @@ void loop() {
         
         int indexOfSpace = cmd.indexOf(' ');
         if (indexOfSpace == -1) {
+
+          Serial.println(cmd);
 
           if (cmd.equals("VEHICLE-FORWARD") && distance > DISTANCE_LIMIT) {
             // NOC robot acts move forward (vehicle) run times 1 
@@ -116,6 +119,9 @@ void loop() {
         else {
           String rootCmd = cmd.substring(0,indexOfSpace);
           int angleCmd = cmd.substring(indexOfSpace+1).toInt();
+
+          Serial.print(rootCmd+" ");
+          Serial.println(angleCmd);
 
           if (rootCmd.equals("LEFT-ELBOW")) {
             setServoAngle(LEFT_ELBOW_ID,angleCmd,1000);
