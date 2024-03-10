@@ -195,8 +195,7 @@ void setup() {
 
 void loop() {
 
-  
-
+  delay(300);
 
   String transformCmd = "";
   if (digitalRead(HUM_TO_VEHIC_BUT)) {
