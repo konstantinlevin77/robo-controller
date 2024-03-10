@@ -72,11 +72,13 @@ void loop() {
 
           if (cmd.equals("VEHICLE-FORWARD") && distance > DISTANCE_LIMIT) {
             // NOC robot acts move forward (vehicle) run times 1 
+            Serial.println("ROBOT SHOULD MOVE FORWARD");
             motion_case(9, 1);
           }
 
           if (cmd.equals("VEHICLE-BACKWARD")) {
             // NOC robot acts move backward (vehicle) run times 1
+            Serial.println("ROBOT SHOULD MOVE BACKWARD")
             motion_case(10,1);
 
           }
