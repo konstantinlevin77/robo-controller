@@ -197,6 +197,8 @@ void loop() {
 
   delay(300);
 
+  
+
   String transformCmd = "";
   if (digitalRead(HUM_TO_VEHIC_BUT)) {
     if (isHumanoid) {
@@ -251,24 +253,24 @@ void loop() {
 
   
   if (!horzCmd.equals("")) {
-    sendString(horzCmd);
+    //sendString(horzCmd);
   }
 
   if (!vertCmd.equals("")) {
-    sendString(vertCmd);
+    //sendString(vertCmd);
   }
 
 
   if (!leftArmCmd.equals("")) {
-    sendString(leftArmCmd);
+    //sendString(leftArmCmd);
   }
 
   if (!leftElbowCmd.equals("")) {
-    sendString(leftElbowCmd);
+    //sendString(leftElbowCmd);
   }
 
   if (!leftShoulderCmd.equals("")) {
-    sendString(leftShoulderCmd);
+    //sendString(leftShoulderCmd);
   }
 
   if (!rightShoulderCmd.equals("")) {
@@ -284,7 +286,7 @@ void loop() {
   }
 
   if (!transformCmd.equals("")) {
-    sendString(transformCmd);
+    //sendString(transformCmd);
   }
 
 
