@@ -212,8 +212,8 @@ void loop() {
   int movY = analogRead(MOVEMENT_CTRL_VERT);
 
   /**/
-  Serial.println("MOV X: "+movX);
-  Serial.println("MOV Y: "+movY);
+  Serial.println("MOV X: "+String(movX));
+  Serial.println("MOV Y: "+String(movY));
 
   String horzCmd = determineMovementHorz(movX);
   String vertCmd = determineMovementVert(movY);
@@ -222,8 +222,8 @@ void loop() {
   int leftCtrlY = analogRead(LEFT_CTRL_VERT);
 
   /**/
-  Serial.println("LEFT CTRL X: "+leftCtrlX);
-  Serial.println("LEFT CTRL Y: "+leftCtrlY);
+  Serial.println("LEFT CTRL X: "+ String(leftCtrlX));
+  Serial.println("LEFT CTRL Y: "+ String(leftCtrlY));
 
   String leftArmCmd = determineArmMovement("LEFT",leftCtrlX);
   String leftElbowCmd = determineElbowMovement("LEFT",leftCtrlY);
@@ -231,8 +231,9 @@ void loop() {
   int rightCtrlX = analogRead(RIGHT_CTRL_HORZ);
   int rightCtrlY = analogRead(RIGHT_CTRL_VERT);
 
-  Serial.println("RIGHT CTRL X: "+rightCtrlX);
-  Serial.println("RIGHT CTRL Y: "+rightCtrlY);
+  /**/
+  Serial.println("RIGHT CTRL X: "+String(rightCtrlX));
+  Serial.println("RIGHT CTRL Y: "+String(rightCtrlY));
 
   String rightArmCmd = determineArmMovement("RIGHT",rightCtrlX);
   String rightElbowCmd = determineElbowMovement("RIGHT",rightCtrlY);
