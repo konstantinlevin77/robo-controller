@@ -211,17 +211,28 @@ void loop() {
   int movX = analogRead(MOVEMENT_CTRL_HORZ);
   int movY = analogRead(MOVEMENT_CTRL_VERT);
 
+  /**/
+  Serial.println("MOV X: "+movX);
+  Serial.println("MOV Y: "+movY);
+
   String horzCmd = determineMovementHorz(movX);
   String vertCmd = determineMovementVert(movY);
 
   int leftCtrlX = analogRead(LEFT_CTRL_HORZ);
   int leftCtrlY = analogRead(LEFT_CTRL_VERT);
 
+  /**/
+  Serial.println("LEFT CTRL X: "+leftCtrlX);
+  Serial.println("LEFT CTRL Y: "+leftCtrlY);
+
   String leftArmCmd = determineArmMovement("LEFT",leftCtrlX);
   String leftElbowCmd = determineElbowMovement("LEFT",leftCtrlY);
 
   int rightCtrlX = analogRead(RIGHT_CTRL_HORZ);
   int rightCtrlY = analogRead(RIGHT_CTRL_VERT);
+
+  Serial.println("RIGHT CTRL X: "+rightCtrlX);
+  Serial.println("RIGHT CTRL Y: "+rightCtrlY);
 
   String rightArmCmd = determineArmMovement("RIGHT",rightCtrlX);
   String rightElbowCmd = determineElbowMovement("RIGHT",rightCtrlY);
