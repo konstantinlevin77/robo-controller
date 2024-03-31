@@ -89,10 +89,10 @@ String determineElbowMovement(String elbow, int ctrlY) {
 
     String cmd = "";
     if ((ctrlY < L_THRESHOLD) && isHumanoid) {
-        cmd = elbow+" L"
+        cmd = elbow+" L";
     }
     if ((ctrlY > H_THRESHOLD) && isHumanoid) {
-        cmd = elbow+" H"
+        cmd = elbow+" H";
     }
 
     return cmd;
@@ -102,10 +102,10 @@ String determineArmMovement(String arm, int ctrlX) {
 
     String cmd = "";
     if ((ctrlX < L_THRESHOLD) && isHumanoid) {
-        cmd = arm+" L"
+        cmd = arm+" L";
     }
     if ((ctrlX > H_THRESHOLD) && isHumanoid) {
-        cmd = arm+" H"
+        cmd = arm+" H";
     }
 
     return cmd;
@@ -114,7 +114,7 @@ String determineArmMovement(String arm, int ctrlX) {
 String determineShoulderMovement(bool isLeftShoulder, int ctrlBut) {
 
     // TODO: Needs to be implemented.
-    cmd = ""
+    String cmd = "";
     return cmd;
 }
 
