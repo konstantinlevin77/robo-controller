@@ -32,13 +32,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 #define LEFT_ARM_ID 3
 
 // How much a component should move when it takes a command.
-#define MOVEMENT_ANGLE 8
+#define MOVEMENT_ANGLE 15
 
 // How much microcontroller should wait to let the robot transform, in miliseconds.
 #define TRANSFORMATION_DELAY 4000
 
 
-#define SERVO_MOVEMENT_DURATION 500
+#define SERVO_MOVEMENT_DURATION 150
 
 // Change the RX and TX pins accordingly.
 SoftwareSerial BT(10,11);

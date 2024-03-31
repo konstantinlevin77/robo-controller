@@ -143,7 +143,7 @@ void setup() {
 
 void loop() {
 
-  delay(300);
+  delay(150);
 
   String transformCmd = "";
 
