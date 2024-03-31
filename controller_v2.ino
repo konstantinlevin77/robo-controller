@@ -29,7 +29,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 #define RIGHT_CTRL_HORZ A5
 #define RIGHT_CTRL_BUT 3
 
-
 #define HUM_TO_VEHIC_BUT 4
 
 /*
@@ -37,43 +36,30 @@ When the joystick is at the center, it returns 512 both for horizontal and verti
 or to the down, the value gets smaller. When you push it to the right or to the up, the value gets bigger.
 These are the threshold values in order to determine in which directions the controller is pushed to.
 */
-#define L_MOV_THRESHOLD 400
-#define R_MOV_THRESHOLD 600
-#define F_MOV_THRESHOLD 600
-#define B_MOV_THRESHOLD 400
-
-/*
-The button of the joystick module I have has some sensivity problems. It clicks a few times no matter how soft I push. 
-Thus we've decided to increase the angle a little bit so that it won't make so much difference.
-*/
-#define SHOULDER_ANGLE_INCREASE 1.5
+#define L_THRESHOLD 400
+#define H_THRESHOLD 600
 
 bool isHumanoid = true;
-
-int leftShoulderAngle = 30;
-int rightShoulderAngle = 30;
-
 
 SoftwareSerial BT(11, 10); // RX, TX
 
 String determineMovementVert(int movY) {
 
-  
   String cmdY = "";
 
-  if (movY <= B_MOV_THRESHOLD && !isHumanoid) {
+  if (movY <= L_THRESHOLD && !isHumanoid) {
     cmdY = "VEHICLE-BACKWARD";
   }
 
-  else if (movY >= F_MOV_THRESHOLD && !isHumanoid) {
+  else if (movY >= H_THRESHOLD && !isHumanoid) {
     cmdY = "VEHICLE-FORWARD";
   }
 
-  else if (movY <= B_MOV_THRESHOLD && isHumanoid) {
+  else if (movY <= L_THRESHOLD && isHumanoid) {
     cmdY = "HUMANOID-BACKWARD";
   }
 
-  else if (movY >= F_MOV_THRESHOLD && isHumanoid) {
+  else if (movY >= H_THRESHOLD && isHumanoid) {
     cmdY = "HUMANOID-FORWARD";
   }
 
@@ -85,11 +71,11 @@ String determineMovementHorz(int movX) {
 
   String cmdX = "";
 
-  if (movX <= L_MOV_THRESHOLD  && !isHumanoid) {
+  if (movX <= L_THRESHOLD  && !isHumanoid) {
     cmdX = "VEHICLE-LEFT";
   }
 
-  else if (movX >= R_MOV_THRESHOLD && !isHumanoid) {
+  else if (movX >= H_THRESHOLD && !isHumanoid) {
     cmdX = "VEHICLE-RIGHT";
   }
 
@@ -99,75 +85,38 @@ String determineMovementHorz(int movX) {
 
 }
 
-
 String determineElbowMovement(String elbow, int ctrlY) {
 
-  String cmd = "";
+    String cmd = "";
+    if ((ctrlY < L_THRESHOLD) && isHumanoid) {
+        cmd = elbow+" L"
+    }
+    if ((ctrlY > H_THRESHOLD) && isHumanoid) {
+        cmd = elbow+" H"
+    }
 
-  // This is to make sure that elbow only moves when controller is actually used.
-  // sometimes potentiometers return values close to 512 even though they're not actually used.
-  if ((ctrlY <= 490 || ctrlY >= 530) && isHumanoid) {
-
-
-    int elbowAngle = map(ctrlY,0,1023,-118,118);
-    cmd = elbow + "-ELBOW "+ String(elbowAngle);
-  }
-
-  return cmd;
-
+    return cmd;
 }
-
 
 String determineArmMovement(String arm, int ctrlX) {
 
-  String cmd = "";
+    String cmd = "";
+    if ((ctrlX < L_THRESHOLD) && isHumanoid) {
+        cmd = arm+" L"
+    }
+    if ((ctrlX > H_THRESHOLD) && isHumanoid) {
+        cmd = arm+" H"
+    }
 
-  // This is to make sure that elbow only moves when controller is actually used.
-  // sometimes potentiometers return values close to 512 even though they're not actually used.
-  if ((ctrlX <= 490 || ctrlX >= 530) && isHumanoid) {
-
-    int elbowAngle = map(ctrlX,0,1023,-118,118);
-    cmd = arm + "-ARM "+ String(-1 * elbowAngle);
-  }
-
-  return cmd;
-
+    return cmd;
 }
-
 
 String determineShoulderMovement(bool isLeftShoulder, int ctrlBut) {
 
-  // Button returns 1 when not pressed, 0 when pressed.
-  if (ctrlBut == 0 && isHumanoid) {
-
-    if (isLeftShoulder) {
-
-      if (leftShoulderAngle >= 90) {
-        leftShoulderAngle = 30;
-      }
-      else{
-        leftShoulderAngle = leftShoulderAngle + SHOULDER_ANGLE_INCREASE;
-      }
-      return "LEFT-SHOULDER " + String(leftShoulderAngle);
-
-    }
-
-    if (!isLeftShoulder) {
-      
-      if (rightShoulderAngle >= 90) {
-        rightShoulderAngle = 30;
-      }
-      else {
-        rightShoulderAngle = rightShoulderAngle + SHOULDER_ANGLE_INCREASE;
-      }
-
-    return "RIGHT-SHOULDER " + String(rightShoulderAngle);
-    }
-
-  }
-  return "";
+    // TODO: Needs to be implemented.
+    cmd = ""
+    return cmd;
 }
-
 
 void sendString(String message) {
   int messageLength = message.length();
@@ -177,9 +126,8 @@ void sendString(String message) {
   BT.write('\n');
 }
 
-
 void setup() {
-  
+
   pinMode(LEFT_CTRL_BUT,INPUT);
   pinMode(RIGHT_CTRL_BUT,INPUT);
   pinMode(HUM_TO_VEHIC_BUT,INPUT);
@@ -189,7 +137,7 @@ void setup() {
 
   Serial.begin(9600);
   BT.begin(9600);
-  Serial.println("Started!");
+  Serial.println("Controller has started!");
 
 }
 
