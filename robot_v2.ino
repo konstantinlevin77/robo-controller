@@ -114,7 +114,7 @@ void loop() {
 
 
           int isHigh = 1;
-          String movementType = cmd.substring(indexOfSpace+1)
+          String movementType = cmd.substring(indexOfSpace+1);
           if (movementType.equals("L")) {
             isHigh = -1;
           }
