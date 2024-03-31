@@ -124,7 +124,7 @@ void loop() {
 
           if (rootCmd.equals("LEFT-ELBOW")) {
 
-            int currentAngle = readServoAnglePD(LEFT_ELBOW_ID);
+            int currentAngle = readServoAngleNPD(LEFT_ELBOW_ID);
             Serial.println("Current angle of left elbow: "+ String(currentAngle));
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
             Serial.println("Angle will be changed as: "+String(desiredAngle));
@@ -133,7 +133,7 @@ void loop() {
 
           if (rootCmd.equals("RIGHT-ELBOW")) {
 
-            int currentAngle = readServoAnglePD(RIGHT_ELBOW_ID);
+            int currentAngle = readServoAngleNPD(RIGHT_ELBOW_ID);
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
             setServoAngle(RIGHT_ELBOW_ID,desiredAngle,1000);
 
@@ -141,7 +141,7 @@ void loop() {
 
           if (rootCmd.equals("LEFT-ARM")) {
 
-            int currentAngle = readServoAnglePD(LEFT_ARM_ID);
+            int currentAngle = readServoAngleNPD(LEFT_ARM_ID);
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
             setServoAngle(LEFT_ARM_ID,desiredAngle,1000);
 
@@ -149,7 +149,7 @@ void loop() {
 
           if (rootCmd.equals("RIGHT-ARM")) {
 
-            int currentAngle = readServoAnglePD(RIGHT_ARM_ID);
+            int currentAngle = readServoAngleNPD(RIGHT_ARM_ID);
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
             setServoAngle(RIGHT_ARM_ID,desiredAngle,1000);
 
@@ -157,7 +157,7 @@ void loop() {
 
           if (rootCmd.equals("LEFT-SHOULDER")) {
 
-            int currentAngle = readServoAnglePD(LEFT_SHOULDER_ID);
+            int currentAngle = readServoAngleNPD(LEFT_SHOULDER_ID);
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
             setServoAngle(LEFT_SHOULDER_ID,desiredAngle,1000);
 
@@ -165,7 +165,7 @@ void loop() {
 
           if (rootCmd.equals("RIGHT-SHOULDER")) {
 
-            int currentAngle = readServoAnglePD(RIGHT_SHOULDER_ID);
+            int currentAngle = readServoAngleNPD(RIGHT_SHOULDER_ID);
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
             setServoAngle(RIGHT_SHOULDER_ID,desiredAngle,1000);
 
