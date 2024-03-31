@@ -37,6 +37,9 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 // How much microcontroller should wait to let the robot transform, in miliseconds.
 #define TRANSFORMATION_DELAY 4000
 
+
+#define SERVO_MOVEMENT_DURATION 500
+
 // Change the RX and TX pins accordingly.
 SoftwareSerial BT(10,11);
 
@@ -128,14 +131,14 @@ void loop() {
             Serial.println("Current angle of left elbow: "+ String(currentAngle));
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
             Serial.println("Angle will be changed as: "+String(desiredAngle));
-            setServoAngle(LEFT_ELBOW_ID,desiredAngle,1000);
+            setServoAngle(LEFT_ELBOW_ID,desiredAngle,SERVO_MOVEMENT_DURATION);
           }
 
           if (rootCmd.equals("RIGHT-ELBOW")) {
 
             int currentAngle = readServoAngleNPD(RIGHT_ELBOW_ID);
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
-            setServoAngle(RIGHT_ELBOW_ID,desiredAngle,1000);
+            setServoAngle(RIGHT_ELBOW_ID,desiredAngle,SERVO_MOVEMENT_DURATION);
 
           }
 
@@ -143,7 +146,7 @@ void loop() {
 
             int currentAngle = readServoAngleNPD(LEFT_ARM_ID);
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
-            setServoAngle(LEFT_ARM_ID,desiredAngle,1000);
+            setServoAngle(LEFT_ARM_ID,desiredAngle,SERVO_MOVEMENT_DURATION);
 
           }
 
@@ -151,7 +154,7 @@ void loop() {
 
             int currentAngle = readServoAngleNPD(RIGHT_ARM_ID);
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
-            setServoAngle(RIGHT_ARM_ID,desiredAngle,1000);
+            setServoAngle(RIGHT_ARM_ID,desiredAngle,SERVO_MOVEMENT_DURATION);
 
           }
 
@@ -159,7 +162,7 @@ void loop() {
 
             int currentAngle = readServoAngleNPD(LEFT_SHOULDER_ID);
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
-            setServoAngle(LEFT_SHOULDER_ID,desiredAngle,1000);
+            setServoAngle(LEFT_SHOULDER_ID,desiredAngle,SERVO_MOVEMENT_DURATION);
 
           }
 
@@ -167,7 +170,7 @@ void loop() {
 
             int currentAngle = readServoAngleNPD(RIGHT_SHOULDER_ID);
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
-            setServoAngle(RIGHT_SHOULDER_ID,desiredAngle,1000);
+            setServoAngle(RIGHT_SHOULDER_ID,desiredAngle,SERVO_MOVEMENT_DURATION);
 
         }
 
