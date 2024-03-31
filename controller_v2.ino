@@ -169,15 +169,15 @@ void loop() {
   int leftCtrlY = analogRead(LEFT_CTRL_VERT);
 
 
-  String leftArmCmd = determineArmMovement("LEFT",leftCtrlX);
-  String leftElbowCmd = determineElbowMovement("LEFT",leftCtrlY);
+  String leftArmCmd = determineArmMovement("LEFT-ARM",leftCtrlX);
+  String leftElbowCmd = determineElbowMovement("LEFT-ELBOW",leftCtrlY);
 
   int rightCtrlX = analogRead(RIGHT_CTRL_HORZ);
   int rightCtrlY = analogRead(RIGHT_CTRL_VERT);
 
 
-  String rightArmCmd = determineArmMovement("RIGHT",rightCtrlX);
-  String rightElbowCmd = determineElbowMovement("RIGHT",rightCtrlY);
+  String rightArmCmd = determineArmMovement("RIGHT-ARM",rightCtrlX);
+  String rightElbowCmd = determineElbowMovement("RIGHT-ELBOW",rightCtrlY);
 
   int leftCtrlBut = digitalRead(LEFT_CTRL_BUT);
   int rightCtrlBut = digitalRead(RIGHT_CTRL_BUT);
