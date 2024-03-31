@@ -199,7 +199,6 @@ void loop() {
     sendString(vertCmd);
   }
 
-
   if (!leftArmCmd.equals("")) {
     sendString(leftArmCmd);
   }

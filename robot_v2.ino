@@ -125,7 +125,9 @@ void loop() {
           if (rootCmd.equals("LEFT-ELBOW")) {
 
             int currentAngle = readServoAnglePD(LEFT_ELBOW_ID);
+            Serial.println("Current angle of left elbow: "+currentAngle);
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
+            Serial.println("Angle will be changed as: "+desiredAngle);
             setServoAngle(LEFT_ELBOW_ID,desiredAngle,1000);
           }
 
