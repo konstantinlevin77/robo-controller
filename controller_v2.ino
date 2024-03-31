@@ -146,6 +146,8 @@ void loop() {
   delay(300);
 
   String transformCmd = "";
+
+  /*
   if (digitalRead(HUM_TO_VEHIC_BUT)) {
     if (isHumanoid) {
       transformCmd = "HUM-TO-VEHIC";
@@ -155,6 +157,7 @@ void loop() {
     }
     isHumanoid = !isHumanoid;
   }
+  */
   
   int movX = analogRead(MOVEMENT_CTRL_HORZ);
   int movY = analogRead(MOVEMENT_CTRL_VERT);
