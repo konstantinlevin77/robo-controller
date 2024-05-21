@@ -31,7 +31,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 #define D5 587.33
 
 // This determines how many miliseconds a quarter note sounds
-#define QUARTER_DUR 250
+#define QUARTER_DUR 300
 
 const float EIGHTH_DUR = QUARTER_DUR / 2;
 const float HALF_DUR = QUARTER_DUR * 2;
@@ -111,18 +111,32 @@ void playNote(String note, int noteValue) {
 void loop() {
 
 
-  String notes[] = {"E4","E4","D4","C4",
+  String notes[] = {
+     
+                    "A4","C5","B4","C5","A4",
+                    "C5","B4","C5",
+                    "A4","C5","C5","B4","C5","B4","C5",
+                    "D5","C5","D5","C5","C5","B4",
+                    "B4","B4","A4","B4","GSharp4",
+                    "B4","A4","B4",
+                    "B4","B4","A4","B4",
+                    "A4","B4",
+                    "C5","B4","C5","B4","B4","A4",  
+    
+                    "E4","E4","D4","C4",
                     "D4","E4","F4","E4","D4","C4",
                     "F4","F4","E4","D4","E4",
                     "F4","F4","F4","G4","F4","D4",
                     "E4","E4","D4","C4",
                     "E4","E4","E4","D4","E4",
+
                     "E4","E4","D4","C4",
                     "D4","E4","F4","E4","D4","C4",
                     "F4","F4","E4","D4","E4",
                     "F4","F4","F4","G4","F4","D4",
                     "E4","E4","D4","C4",
                     "E4","E4","E4","D4","E4",
+
                    	"A4","C5","B4","C5","A4",
                     "C5","B4","C5",
                     "A4","C5","C5","B4","C5","B4","C5",
@@ -132,6 +146,7 @@ void loop() {
                     "B4","B4","A4","B4",
                     "A4","B4",
                     "C5","B4","C5","B4","B4","A4",
+
                     "A4","C5","B4","C5","A4",
                     "C5","B4","C5",
                     "A4","C5","C5","B4","C5","B4","C5",
