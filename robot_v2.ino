@@ -43,6 +43,9 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 // Change the RX and TX pins accordingly.
 SoftwareSerial BT(10,11);
 
+bool leftShoulderKeepGoingDown = false;
+bool rightShoulderKeepGoingDown = false;
+
 void setup() {
     Initialization();
     if (protocolRunState == false) {
@@ -163,11 +166,24 @@ void loop() {
             int currentAngle = readServoAngleNPD(LEFT_SHOULDER_ID);
 
             if (currentAngle >= 100) {
+              leftShoulderKeepGoingDown = true;
               isHigh = -1;
             }
 
+            if (leftShoulderKeepGoingDown) {
+              isHigh = -1;
+            }
+
+            if (currentAngle <= -100) {
+              leftShoulderKeepGoingDown = false;
+              isHigh = 1;
+            }
+          
+
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
             setServoAngle(LEFT_SHOULDER_ID,desiredAngle,SERVO_MOVEMENT_DURATION);
+
+            previousLeftShoulderAngle = currentAngle;
 
           }
 
@@ -176,11 +192,23 @@ void loop() {
             int currentAngle = readServoAngleNPD(RIGHT_SHOULDER_ID);
 
             if (currentAngle >= 100) {
+              rightShoulderKeepGoingDown = true;
               isHigh = -1;
+            }
+
+            if (rightShoulderKeepGoingDown) {
+              isHigh = -1;
+            }
+
+            if (currentAngle <= -100) {
+              rightShoulderKeepGoingDown = false;
+              isHigh = 1;
             }
 
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
             setServoAngle(RIGHT_SHOULDER_ID,desiredAngle,SERVO_MOVEMENT_DURATION);
+
+            previousRightShoulderAngle = currentAngle;
 
         }
 
