@@ -161,6 +161,11 @@ void loop() {
           if (rootCmd.equals("LEFT-SHOULDER")) {
 
             int currentAngle = readServoAngleNPD(LEFT_SHOULDER_ID);
+
+            if (currentAngle >= 100) {
+              isHigh = -1;
+            }
+
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
             setServoAngle(LEFT_SHOULDER_ID,desiredAngle,SERVO_MOVEMENT_DURATION);
 
@@ -169,6 +174,11 @@ void loop() {
           if (rootCmd.equals("RIGHT-SHOULDER")) {
 
             int currentAngle = readServoAngleNPD(RIGHT_SHOULDER_ID);
+
+            if (currentAngle >= 100) {
+              isHigh = -1;
+            }
+
             int desiredAngle = currentAngle + isHigh * MOVEMENT_ANGLE;
             setServoAngle(RIGHT_SHOULDER_ID,desiredAngle,SERVO_MOVEMENT_DURATION);
 

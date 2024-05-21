@@ -29,7 +29,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 #define RIGHT_CTRL_HORZ A5
 #define RIGHT_CTRL_BUT 3
 
-#define HUM_TO_VEHIC_BUT 4
+#define HUM_TO_VEHIC_SWI 4
 
 /*
 When the joystick is at the center, it returns 512 both for horizontal and vertical axes. When you push it to the left
@@ -39,7 +39,7 @@ These are the threshold values in order to determine in which directions the con
 #define L_THRESHOLD 400
 #define H_THRESHOLD 600
 
-bool isHumanoid = true;
+
 
 SoftwareSerial BT(11, 10); // RX, TX
 
@@ -113,8 +113,14 @@ String determineArmMovement(String arm, int ctrlX) {
 
 String determineShoulderMovement(bool isLeftShoulder, int ctrlBut) {
 
-    // TODO: Needs to be implemented.
     String cmd = "";
+    String prefix = "RIGHT-";
+    if (isLeftShoulder) {
+      prefix = "LEFT-";
+    }
+    if (ctrlBut) {
+      cmd = prefix+"SHOULDER H";
+    }
     return cmd;
 }
 
@@ -141,23 +147,31 @@ void setup() {
 
 }
 
+int previousSwitchState = 0;
+bool isHumanoid = true;
+
 void loop() {
 
   delay(150);
 
   String transformCmd = "";
 
-  /*
-  if (digitalRead(HUM_TO_VEHIC_BUT)) {
-    if (isHumanoid) {
+
+  /*int currentSwitchState = digitalRead(HUM_TO_VEHIC_SWI);
+  if (currentSwitchState != previousSwitchState) {
+    previousSwitchState = currentSwitchState;
+    
+    if (currentSwitchState == 0 && isHumanoid) {
       transformCmd = "HUM-TO-VEHIC";
     }
     else {
       transformCmd = "VEHIC-TO-HUM";
+      isHumanoid = !isHumanoid;
     }
-    isHumanoid = !isHumanoid;
-  }
-  */
+
+  }*/
+
+
   
   int movX = analogRead(MOVEMENT_CTRL_HORZ);
   int movY = analogRead(MOVEMENT_CTRL_VERT);
