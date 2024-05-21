@@ -39,6 +39,8 @@ These are the threshold values in order to determine in which directions the con
 #define L_THRESHOLD 400
 #define H_THRESHOLD 600
 
+int previousSwitchState = 0;
+bool isHumanoid = true;
 
 
 SoftwareSerial BT(11, 10); // RX, TX
@@ -136,7 +138,7 @@ void setup() {
 
   pinMode(LEFT_CTRL_BUT,INPUT);
   pinMode(RIGHT_CTRL_BUT,INPUT);
-  pinMode(HUM_TO_VEHIC_BUT,INPUT);
+  pinMode(HUM_TO_VEHIC_SWI,INPUT);
 
   digitalWrite(LEFT_CTRL_BUT,HIGH);
   digitalWrite(RIGHT_CTRL_BUT,HIGH);
@@ -147,8 +149,6 @@ void setup() {
 
 }
 
-int previousSwitchState = 0;
-bool isHumanoid = true;
 
 void loop() {
 
