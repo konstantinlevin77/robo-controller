@@ -120,7 +120,7 @@ String determineShoulderMovement(bool isLeftShoulder, int ctrlBut) {
     if (isLeftShoulder) {
       prefix = "LEFT-";
     }
-    if (ctrlBut) {
+    if (!ctrlBut) {
       cmd = prefix+"SHOULDER H";
     }
     return cmd;
